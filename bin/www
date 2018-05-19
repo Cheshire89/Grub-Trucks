@@ -7,7 +7,7 @@
 let app = require('../app');
 let debug = require('debug')('loc8r:server');
 let http = require('http');
-const portNum = '3000';
+const portNum = '4000';
 
 /**
  * Get port from environment and store in Express.
