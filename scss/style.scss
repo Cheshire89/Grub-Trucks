@@ -1,10 +1,11 @@
 @import 'ui/fonts';
 @import 'ui/vars';
 @import 'ui/mixins';
+@import 'ui/global';
 @import 'ui/headers';
 @import 'ui/tables';
 @import 'ui/forms';
-@import 'ui/containers';
+@import 'ui/panel';
 
 body{
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;

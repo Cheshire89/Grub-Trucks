@@ -1,3 +1,98 @@
 extends layout
 
 block content
+    .row.page-header
+        .col
+            .card.panel__info--no-spasing.border-none
+                .card-body
+                    h1 Starcups
+                    p.rating
+                        span.fas.fa-star
+                        span.fas.fa-star
+                        span.fas.fa-star
+                        span.far.fa-star
+                        span.far.fa-star
+                    p 125 High Street, Reading, RG6 1PS
+    .row
+        .col-sm-6.h-100.order-2.order-md-1
+            .card.panel__info
+                .card-header
+                    h4.card-title.--title Opening hours
+                .card-body
+                    p Monday - Friday : 7:00am - 7:00pm
+                    p Saturday : 8:00am - 5:00pm
+                    p Monday : closed
+
+            .card.panel__info
+                .card-header
+                    h4.card-title.--title About
+                .card-body
+                    p This cafe is here because they have outstanding selection and fast wifi. I personally love working from this caffe
+                    p If you've been and you like it - please leave a review to help other peopel like you
+
+            .card.panel__info
+                .card-header
+                    h4.card-title.--title Facilities
+                .card-body.d-flex
+                    div.align-self-center
+                        h5.mb-0
+                            span.badge.badge-danger
+                                i.fas.fa-check
+                                | &nbsp; Hot Drinks
+                            |&nbsp;
+                            span.badge.badge-danger
+                                i.fas.fa-check
+                                | &nbsp; Food
+                            |&nbsp;
+                            span.badge.badge-danger
+                                i.fas.fa-check
+                                | &nbsp; Premium wifi
+                            |&nbsp;
+        .col-sm-6.location-map.order-1.order-md-2
+            .card.panel__info
+                .card-header
+                    h4.card-title.--title.mb-0 Location Map
+                .card-body
+                    img.mx-auto.img-fluid(src="https://maps.googleapis.com/maps/api/staticmap?center=39.689681,-104.980158&size=500x475&&sensor=false&markers=39.689681, -104.980158&LRmQIX1xlcPhEj6lFOw21o-MgMA=AIzaSyBhXdSgJMV982NO9nc-YIWIlXTes0jZOI8 ")
+    .row
+        .col
+            .card.panel__info
+                .card-header.d-flex.justify-content-between.align-items-center
+                    h4.card-title.--title Customer reviews
+                    a.btn.btn-primary(href="/location/review/new") Add Review
+                .card-body
+                    .row.justify-content-center
+                        .col
+                            .card.panel__list_item
+                                .card-header
+                                    span.rating
+                                        span.fas.fa-star
+                                        span.fas.fa-star
+                                        span.fas.fa-star
+                                        span.far.fa-star
+                                        span.far.fa-star
+                                    | &nbsp;
+                                    span.reviewAuthor Aleksandr Antonov
+                                    | &nbsp;
+                                    small.reviewTimestrapm 16 July 2018
+                                .card-body
+                                    p.mb-0 What a great place! I can't say enought good things about it !
+                    .row.justify-content-center
+                        .col
+                            .card.panel__list_item
+                                .card-header
+                                    span.rating
+                                        span.fas.fa-star
+                                        span.fas.fa-star
+                                        span.fas.fa-star
+                                        span.far.fa-star
+                                        span.far.fa-star
+                                    | &nbsp;
+                                    span.reviewAuthor Aleksandr Antonov
+                                    | &nbsp;
+                                    small.reviewTimestrapm 16 July 2018
+                                .card-body
+                                    p.mb-0 What a great place! I can't say enought good things about it !
+            
+
+

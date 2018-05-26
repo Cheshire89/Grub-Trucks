@@ -1,0 +1,15 @@
+.panel{
+    @include element('info') {
+        margin-bottom: $panel-margin;
+        @include modifier('no-spasing'){
+            margin-bottom: 0px;
+        }
+        .--title{
+            margin:0
+        }
+    }
+
+    @include element('list_item'){
+        margin-bottom: $col-spasing;
+    }
+}
