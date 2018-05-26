@@ -1,40 +1,35 @@
 extends layout
 
+include includes/sharedHTMLfunctions
+
 block content
   .page-header
     .row
       .col
         .card.panel__info--no-spasing.border-none
           .card-body
-            h1 Loc8r
-              small &nbsp;Find places to work with wifi near you!
+            h1= pageHeader.title
+              small &nbsp; #{pageHeader.strapLine}
   .row
     .col-xs-12.col-sm-8
       .row
-        .col-12.card.panel__list_item
-          .card-body
-            .row
-              .col
-                h4.card-title
-                  a(href="/location") Coffee on the Platte
-              .col
-                h5
-                  span.badge.badge-pill.badge-dark.pull-right 100m
-            p
-              span.fas.fa-star
-              span.fas.fa-star
-              span.fas.fa-star
-              span.far.fa-star
-              span.far.fa-star
-            address.card-text
-              p 125 High Street, Reading RG6 1PS
-            p
-              span.badge.badge-danger Hot drinks
-              | &nbsp;
-              span.badge.badge-danger Food
-              | &nbsp;
-              span.badge.badge-danger Premium wifi
-              | &nbsp;
+        each location in locations
+          .col-12.card.panel__list_item
+            .card-body
+              .row
+                .col
+                  h4.card-title
+                    a(href="/location") #{location.name}
+                .col
+                  h5
+                    span.badge.badge-pill.badge-dark.pull-right #{location.distance}
+              p
+                +outputRating(location.rating)
+              address.card-text
+                p #{location.address}
+              p
+                +facilities(location.facilities)
+
     .col-xs-12.col-sm-4
       .card.panel__info
         .card-body
