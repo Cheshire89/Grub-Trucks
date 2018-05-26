@@ -12,58 +12,67 @@ block content
                         +outputRating(location.rating)
                     p #{location.address}
     .row
-        .col-sm-6.h-100.order-2.order-md-1
-            .card.panel__info
-                .card-header
-                    h4.card-title.--title Opening hours
+        .col
+            .card.panel__info.border-none
                 .card-body
-                    each time in location.openingTimes
-                        p #{time.days} : 
-                            if time.closed == false
-                               | #{time.opening} - #{time.closing}
-                            else
-                                | Closed
+                    .row
+                        .col-sm-6.h-100.order-2.order-md-1
+                            .card.panel__info
+                                .card-header
+                                    h4.card-title.--title Opening hours
+                                .card-body
+                                    each time in location.openingTimes
+                                        p #{time.days} : 
+                                            if time.closed == false
+                                                | #{time.opening} - #{time.closing}
+                                            else
+                                                | Closed
 
-            .card.panel__info
-                .card-header
-                    h4.card-title.--title About
-                .card-body
-                    p #{about.content}
-                    p #{about.callToAction}
+                            .card.panel__info
+                                .card-header
+                                    h4.card-title.--title About
+                                .card-body
+                                    p #{about.content}
+                                    p #{about.callToAction}
 
-            .card.panel__info
-                .card-header
-                    h4.card-title.--title Facilities
-                .card-body.d-flex
-                    div.align-self-center
-                        h5.mb-0
-                            +facilities(location.facilities)
-        .col-sm-6.location-map.order-1.order-md-2
-            .card.panel__info
-                .card-header
-                    h4.card-title.--title.mb-0 Location Map
-                .card-body
-                    img.mx-auto.img-fluid(src="https://maps.googleapis.com/maps/api/staticmap?center="+ location.coords.lat+","+location.coords.lng+"&size=500x475&&sensor=false&markers="+location.coords.lat+", "+location.coords.lng+"&LRmQIX1xlcPhEj6lFOw21o-MgMA=AIzaSyBhXdSgJMV982NO9nc-YIWIlXTes0jZOI8 ")
+                            .card.panel__info
+                                .card-header
+                                    h4.card-title.--title Facilities
+                                .card-body.d-flex
+                                    div.align-self-center
+                                        h5.mb-0
+                                            +facilities(location.facilities)
+                        .col-sm-6.location-map.order-1.order-md-2
+                            .card.panel__info
+                                .card-header
+                                    h4.card-title.--title.mb-0 Location Map
+                                .card-body
+                                    img.mx-auto.img-fluid(src="https://maps.googleapis.com/maps/api/staticmap?center="+ location.coords.lat+","+location.coords.lng+"&size=500x475&&sensor=false&markers="+location.coords.lat+", "+location.coords.lng+"&LRmQIX1xlcPhEj6lFOw21o-MgMA=AIzaSyBhXdSgJMV982NO9nc-YIWIlXTes0jZOI8 ")
     .row
         .col
-            .card.panel__info
-                .card-header.d-flex.justify-content-between.align-items-center
-                    h4.card-title.--title Customer reviews
-                    a.btn.btn-primary(href="/location/review/new") Add Review
+            .card.panel__info.border-none
                 .card-body
-                    each locationRev in location.reviews
-                        .row.justify-content-center
-                            .col
-                                .card.panel__list_item
-                                    .card-header
-                                        span.rating
-                                            +outputRating(locationRev.rating)
-                                        | &nbsp;
-                                        span.reviewAuthor #{locationRev.author}
-                                        | &nbsp;
-                                        small.reviewTimestrapm #{locationRev.timeStamp}
-                                    .card-body
-                                        p.mb-0 #{locationRev.review}
-            
+                    .row
+                        .col
+                            .card.panel__info
+                                .card-header.d-flex.justify-content-between.align-items-center
+                                    h4.card-title.--title Customer reviews
+                                    a.btn.btn-primary(href="/location/review/new") Add Review
+                                .card-body
+                                    each locationRev in location.reviews
+                                        .row.justify-content-center
+                                            .col
+                                                .card.panel__list_item
+                                                    .card-header
+                                                        span.rating
+                                                            +outputRating(locationRev.rating)
+                                                        | &nbsp;
+                                                        span.reviewAuthor #{locationRev.author}
+                                                        | &nbsp;
+                                                        small.reviewTimestrapm #{locationRev.timeStamp}
+                                                    .card-body
+                                                        p.mb-0 #{locationRev.review}
+                            
 
+                               
 

@@ -11,29 +11,33 @@ block content
             h1= pageHeader.title
               small &nbsp; #{pageHeader.strapLine}
   .row
-    .col-xs-12.col-sm-8
-      .row
-        each location in locations
-          .col-12.card.panel__list_item
-            .card-body
-              .row
-                .col
-                  h4.card-title
-                    a(href="/location") #{location.name}
-                .col
-                  h5
-                    span.badge.badge-pill.badge-dark.pull-right #{location.distance}
-              p
-                +outputRating(location.rating)
-              address.card-text
-                p #{location.address}
-              p
-                +facilities(location.facilities)
-
-    .col-xs-12.col-sm-4
-      .card.panel__info
+    .col
+      .card.panel__info.border-none
         .card-body
-          p.lead
-            | Loc8r helps you find places to work when out and about.
-            | Perhaps with coffee. cake or a pint ? Let Loc8r help you find the place you're looking for.
+          .row
+            .col-xs-12.col-sm-8
+              .row
+                each location in locations
+                  .col-12.card.panel__list_item
+                    .card-body
+                      .row
+                        .col
+                          h4.card-title
+                            a(href="/location") #{location.name}
+                        .col
+                          h5
+                            span.badge.badge-pill.badge-dark.pull-right #{location.distance}
+                      p
+                        +outputRating(location.rating)
+                      address.card-text
+                        p #{location.address}
+                      p
+                        +facilities(location.facilities)
+
+            .col-xs-12.col-sm-4
+              .card.panel__info
+                .card-body
+                  p.lead
+                    | Loc8r helps you find places to work when out and about.
+                    | Perhaps with coffee. cake or a pint ? Let Loc8r help you find the place you're looking for.
 
