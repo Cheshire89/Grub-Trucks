@@ -2,6 +2,14 @@ require('./location');
 var mongoose = require('mongoose');
 var dbName = 'Loc8r';
 var dbURI = 'mongodb://localhost/' + dbName;
+var liveDb = {
+    username: 'heroku_8m0qsfb8',
+    password: 'h0kq6j97qsdos2o1lk7aa4nq8f',
+    server: 'ds137740.mlab.com:37740',
+    db_name: 'heroku_8m0qsfb8',
+}
+
+
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function () {
