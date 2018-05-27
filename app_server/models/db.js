@@ -1,7 +1,7 @@
 require('./location');
 var mongoose = require('mongoose');
-
-var dbURI = 'mongodb://localhost/Loc8r';
+var dbName = 'Loc8r';
+var dbURI = 'mongodb://localhost/' + dbName;
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function () {
