@@ -5,15 +5,15 @@ include includes/sharedHTMLfunctions
 block content
     .row.page-header
         .col
-            .card.panel__info--no-spasing.border-none
+            .card.panel__info--no-spasing.border-none.mb-0
                 .card-body
                     h1 #{pageHeader.title}
                     p.rating
                         +outputRating(location.rating)
-                    p #{location.address}
+                    p.mb-0 #{location.address}
     .row
         .col
-            .card.panel__info.border-none
+            .card.panel__info.border-none.mb-0
                 .card-body
                     .row
                         .col-sm-6.h-100.order-2.order-md-1
@@ -47,7 +47,7 @@ block content
                                 .card-header
                                     h4.card-title.--title.mb-0 Location Map
                                 .card-body
-                                    img.mx-auto.img-fluid(src="https://maps.googleapis.com/maps/api/staticmap?center="+ location.coords.lat+","+location.coords.lng+"&size=500x475&&sensor=false&markers="+location.coords.lat+", "+location.coords.lng+"&LRmQIX1xlcPhEj6lFOw21o-MgMA=AIzaSyBhXdSgJMV982NO9nc-YIWIlXTes0jZOI8 ")
+                                    img.mx-auto.img-fluid(src="https://maps.googleapis.com/maps/api/staticmap?center="+ location.coords.lat+","+location.coords.lng+"&size=500x475&&sensor=false&markers="+location.coords.lat+", "+location.coords.lng+"&"+location.key.auth)
     .row
         .col
             .card.panel__info.border-none
