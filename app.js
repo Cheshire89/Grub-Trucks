@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 var indexRouter = require('./app_server/routes/index');
+require('./app_server/models/db');
 
 var app = express();
 
@@ -21,7 +22,6 @@ app.use(sassMiddleware({
   src: __dirname + '/scss',
   dest: __dirname + '/public/css',
   indentedSyntax: false, // true = .sass and false = .scss
-  debug:true,
   sourceMap: true,
   prefix: '/css'
 }));
