@@ -51,6 +51,7 @@ npm-debug.log
 /documentation/index.html
 aws-keys.json
 
+bash/
 app_server/models/db.js
 tmp/
 build/

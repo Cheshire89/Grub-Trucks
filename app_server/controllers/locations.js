@@ -50,12 +50,7 @@ module.exports.locationInfo = (req, res, next) => {
             address: '1476 S Pearl St, Denver, CO 80210',
             rating: 3,
             facilities: ['Hot drinks', 'Wifi', 'Live Music'],
-            coords: {lat: 39.689681, lng: -104.980158},
-            key: {
-                clientSecret: 'LRmQIX1xlcPhEj6lFOw21o-MgMA',
-                keySecret: 'AIzaSyBhXdSgJMV982NO9nc-YIWIlXTes0jZOI8',
-                auth: this.clientSecret + '=' + this.keySecret
-            },
+            coords: [-104.980158, 39.689681],
             openingTimes: [
                 {
                     days: 'Monday - Friday',
@@ -80,12 +75,6 @@ module.exports.locationInfo = (req, res, next) => {
                     timeStamp: '16 July 2018',
                     rating: 4,
                     review: 'What a great place! I can\'t say enought good things about it !'
-                },
-                {
-                    author: 'John Smith',
-                    timeStamp: '1 Apr 2018',
-                    rating: 2,
-                    review: 'I was not so impressed'
                 }
             ]
         }
