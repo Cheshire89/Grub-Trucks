@@ -47,7 +47,7 @@ block content
                                 .card-header
                                     h4.card-title.--title.mb-0 Location Map
                                 .card-body
-                                    img.mx-auto.img-fluid(src="https://maps.googleapis.com/maps/api/staticmap?center="+ location.coords.lat+","+location.coords.lng+"&size=500x475&&sensor=false&markers="+location.coords[1]+", "+location.coords[0]+"&"+location.key.auth)
+                                    img.mx-auto.img-fluid(src="https://maps.googleapis.com/maps/api/staticmap?center="+ location.coords[0]+","+location.coords[1]+"&size=500x475&&sensor=false&markers="+location.coords[1]+", "+location.coords[0]+"&"+location.key.auth)
     .row
         .col
             .card.panel__info.border-none

@@ -50,7 +50,7 @@ module.exports.locationInfo = (req, res, next) => {
             address: '1476 S Pearl St, Denver, CO 80210',
             rating: 3,
             facilities: ['Hot drinks', 'Wifi', 'Live Music'],
-            coords: [-104.980158, 39.689681],
+            coords: [-104.980142, 39.689702],
             key: {
                 clientSecret: 'LRmQIX1xlcPhEj6lFOw21o-MgMA',
                 keySecret: 'AIzaSyBhXdSgJMV982NO9nc-YIWIlXTes0jZOI8',
