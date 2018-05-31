@@ -51,6 +51,11 @@ module.exports.locationInfo = (req, res, next) => {
             rating: 3,
             facilities: ['Hot drinks', 'Wifi', 'Live Music'],
             coords: [-104.980158, 39.689681],
+            key: {
+                clientSecret: 'LRmQIX1xlcPhEj6lFOw21o-MgMA',
+                keySecret: 'AIzaSyBhXdSgJMV982NO9nc-YIWIlXTes0jZOI8',
+                auth: this.clientSecret + '=' + this.keySecret
+            },
             openingTimes: [
                 {
                     days: 'Monday - Friday',
