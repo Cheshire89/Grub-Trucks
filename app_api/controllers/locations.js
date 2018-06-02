@@ -1,7 +1,7 @@
 'use strict';
 
-var mongose = require('mongose');
-var Loc = mongose.model('Location');
+var mongoose = require('mongoose');
+var Loc = mongoose.model('Location');
 
 module.exports.locationsCreate = (req, res, next) => {
     sendJsonResponse(res, 200, {"status":"success"});
