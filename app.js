@@ -4,9 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
+require('./app_api/models/db');
 var routes = require('./app_server/routes/index');
 var routesApi = require('./app_api/routes/index');
-require('./app_server/models/db');
 
 var app = express();
 

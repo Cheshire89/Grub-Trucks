@@ -4,14 +4,13 @@ var mongoose = require('mongoose');
 var Loc = mongoose.model('Location');
 
 module.exports.locationsCreate = (req, res, next) => {
-    sendJsonResponse(res, 200, {"status":"success"});
 }
 
 module.exports.locationsListByDistance = (req, res, next) => {
-
 }
 
 module.exports.locationsReadOne = (req, res, next) => {
+    sendJsonResponse(res, 200, {"status":"success"});
 
 }
 
