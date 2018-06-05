@@ -21,14 +21,43 @@ let theEarth = (function () {
 })();
 
 module.exports.locationsCreate = (req, res, next) => {
+    Loc.create({
+        name: req.body.name,
+        address: req.body.address,
+        rating: req.body.rating,
+        facilities: req.body.facilities.split(","),
+        coords: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
+        openingTimes: [{
+          days: req.body.days1,
+          opening: req.body.opening1,
+          closing: req.body.closing1,
+          closed: req.body.closed1,
+        }, {
+          days: req.body.days2,
+          opening: req.body.opening2,
+          closing: req.body.closing2,
+          closed: req.body.closed2,
+        }]
+      }, (error, location) => {
+        if (error) {
+          Res.sendJsonResponse(res, 400, error);
+        } else {
+          Res.sendJsonResponse(res, 200, location);
+        }
+      });
 }
 
 module.exports.locationsListByDistance = (req, res, next) => {
     //http://localhost:4000/api/locations?lng=-104.98653&lat=39.732975&dist=20
     let lng = parseFloat(req.query.lng);
     let lat = parseFloat(req.query.lat);
-    let dist = parseFloat(req.query.dist) * 1000;
-
+    let dist = req.query.dist ? parseFloat(req.query.dist) * 1000 : 1000;
+    if (!(lng && lat)) {
+        Res.sendJsonResponse(res, 400, {
+            "message" : "[lng] and/or [lat] parameters are missing"
+        });
+        return;
+    } 
     let point = {
         type: 'Point',
         coordinates: [lng, lat]
@@ -54,7 +83,7 @@ module.exports.locationsListByDistance = (req, res, next) => {
             rating: true,
             facilities: true
         }
-    }]).then((results, stats) => {
+    }]).then((results) => {
         if (results.length > 0) {
             Res.sendJsonResponse(res, 200, results);
         } else {
@@ -68,7 +97,12 @@ module.exports.locationsListByDistance = (req, res, next) => {
 }
 
 module.exports.locationsReadOne = (req, res, next) => {
-    if(req.params && req.params.locationId){
+    if(!(req.params && req.params.locationId)) { 
+        Res.sendJsonResponse(res, 400, {
+            "message" : "[locationId] parameter is missing"
+        });
+        return;
+    }
         Loc
         .findById(req.params.locationId)
         .exec((error, location) => {
@@ -84,11 +118,6 @@ module.exports.locationsReadOne = (req, res, next) => {
             Res.sendJsonResponse(res, 200, location);
             return;
         });
-    } else {
-        Res.sendJsonResponse(res, 404, {
-            "message" : "No [locationId] in request"
-        });
-    }
 }
 
 module.exports.locationsUpdateOne = (req, res, next) => {
