@@ -1,4 +1,13 @@
 'use strict';
+let request = require('request');
+let apiOptions = {
+    server: 'mongodb://127.0.0.1/Loc8r'
+};
+if (process.env.NODE_ENV === 'production') {
+    apiOptions.server = process.env.MONGODB_URI;
+}
+
+
 
 // Get 'home' page
 module.exports.homelist = (req, res, next) => {
