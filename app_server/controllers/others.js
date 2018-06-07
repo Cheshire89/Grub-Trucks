@@ -2,9 +2,9 @@
 
 module.exports.about = (req, res, next) => {
     res.render('generic-text', { 
-        title: 'About Loc8r',
+        title: 'About GrubTrucks',
         pageHeader: {
-            title: 'About Loc8r'
+            title: 'About GrubTrucks'
         }
     });
 };
