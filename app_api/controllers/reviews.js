@@ -78,7 +78,53 @@ module.exports.reviewsReadOne = (req, res, next) => {
 }
 
 module.exports.reviewsUpdateOne = (req, res, next) => {
+    if (!req.params.locationId || !req.params.reviewId) {
+        Res.sendJsonResponse(res, 400, {
+            "message" : "Not found. [locationId] and [reviewId] are both required"
+        });
+        return;
+    }
 
+    Loc
+        .findById(req.params.locationId)
+        .select('reviews')
+        .exec((error, location) => {
+            let thisReview;
+            if (!location) {
+                Res.sendJsonResponse(res, 404, {
+                    "message": "[locationId] not found."
+                });
+                return;
+            } else if (error) {
+                Res.sendJsonResponse(res, 400, error);
+                return;
+            }
+
+            if (location.reviews && location.reviews.length > 0) {
+                thisReview = location.reviews.id(req.params.reviewId);
+                if (!thisReview) {
+                    Res.sendJsonResponse(res, 404, {
+                        "message" : "[reviewId not found."
+                    });
+                    return;
+                } else {
+                    thisReview = gerReviewRequestObject(req);
+
+                    location.save((error, location) => {
+                        if (error) {
+                            Res.sendJsonResponse(res, 404, error);
+                        } else {
+                            updateAverageRating(location._id);
+                            Res.sendJsonResponse(res, 200, thisReview);
+                        }
+                    })
+                }
+            } else {
+                Res.sendJsonResponse(res, 404, {
+                    "message" : "No review to update"
+                });
+            }
+        })
 }
 
 module.exports.reviewsDeleteOne = (req, res, next) => {
@@ -91,11 +137,7 @@ let doAddReview = (req, res, location) => {
             "message" : "Not found, [locationId] required"
         });
     } else {
-       location.reviews.push({
-           author: req.body.author,
-           rating: req.body.rating,
-           review: req.body.review
-       });
+       location.reviews.push(gerReviewRequestObject(req));
        location.save((error, location) => {
            if (error) {
                Res.sendJsonResponse(res, 400, error);
@@ -140,3 +182,11 @@ let doSetAverageRating = (location) => {
         });
     }
 };
+
+let gerReviewRequestObject = (req) => {
+    return {
+        author: req.body.author,
+        rating: req.body.rating,
+        review: req.body.review
+    };
+}
