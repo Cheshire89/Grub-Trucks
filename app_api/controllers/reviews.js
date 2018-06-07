@@ -128,7 +128,51 @@ module.exports.reviewsUpdateOne = (req, res, next) => {
 }
 
 module.exports.reviewsDeleteOne = (req, res, next) => {
+    if(!req.params.locationId || !req.params.reviewId) {
+        Res.sendJsonResponse(res, 400, {
+            "message": "Not found. [locationId] and [reviewId] are required"
+        });
+        return;
+    }
 
+    Loc
+        .findById(req.params.locationId)
+        .select('reviews')
+        .exec((error, location) => {
+            if (!location) {
+                Res.sendJsonResponse(res, 404, {
+                    "message" : "Location not found"
+                });
+                return;
+            } else if (error) {
+                Res.sendJsonResponse(res, 400, error);
+                return;
+            }
+
+            if (location.reviews && location.reviews.length > 0) {
+                if (!location.reviews.id(req.body.reviewId)) {
+                    Res.sendJsonResponse(res, 404, {
+                        "message" : "[reviewId] not found"
+                    });
+                    return;
+                } else {
+                    location.reviews.id(req.params.reviewId).remove();
+                    location.save((error, location) => {
+                        if (error) {
+                            Res.sendJsonResponse(res, 404, error);
+                            return;
+                        } else {
+                            updateAverageRating(location._id);
+                            Res.sendJsonResponse(res, 200, null);
+                        }
+                    });
+                }
+            } else {
+                Res.sendJsonResponse(res, 404, {
+                    "message" : "No review to delete"
+                });
+            }
+        })
 }
 
 let doAddReview = (req, res, location) => {
