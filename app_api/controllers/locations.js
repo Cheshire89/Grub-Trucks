@@ -24,27 +24,26 @@ module.exports.locationsCreate = (req, res, next) => {
     Loc.create({
         name: req.body.name,
         address: req.body.address,
-        rating: req.body.rating,
         facilities: req.body.facilities.split(","),
         coords: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
         openingTimes: [{
-          days: req.body.days1,
-          opening: req.body.opening1,
-          closing: req.body.closing1,
-          closed: req.body.closed1,
-        }, {
-          days: req.body.days2,
-          opening: req.body.opening2,
-          closing: req.body.closing2,
-          closed: req.body.closed2,
+            days: req.body.days1,
+            opening: req.body.opening1,
+            closing: req.body.closing1,
+            closed: req.body.closed1
+        },{
+            days: req.body.days2,
+            opening: req.body.opening2,
+            closing: req.body.closing2,
+            closed: req.body.closed2
         }]
-      }, (error, location) => {
+    }, (error, location) => {
         if (error) {
-          Res.sendJsonResponse(res, 400, error);
+            Res.sendJsonResponse(res, 400, error);
         } else {
-          Res.sendJsonResponse(res, 200, location);
+            Res.sendJsonResponse(res, 201, location);
         }
-      });
+    })
 }
 
 module.exports.locationsListByDistance = (req, res, next) => {
