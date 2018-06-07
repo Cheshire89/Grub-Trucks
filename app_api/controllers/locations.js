@@ -139,7 +139,23 @@ module.exports.locationsUpdateOne = (req, res, next) => {
 }
 
 module.exports.locationsDeleteOne = (req, res, next) => {
+    let locationId = req.body.locationId;
+    if (!locationId) {
+        Res.sendJsonResponse(res, 400, {
+            "message" : "[locationId] is required"
+        });
+        return;
+    }
 
+    Loc.
+        findById(locationId)
+        .exec((error, location) => {
+            if (error) {
+                Res.sendJsonResponse(res, 404, error);
+                return;
+            }
+            Res.sendJsonResponse(res, 204, null);
+        });
 }
 
 let getLocationRequestObject = (req) => {
