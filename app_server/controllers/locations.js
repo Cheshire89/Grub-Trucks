@@ -1,46 +1,63 @@
 'use strict';
 let request = require('request');
 let apiOptions = {
-    server: 'mongodb://127.0.0.1/Loc8r'
+    server: 'http://localhost:4000'
 };
 if (process.env.NODE_ENV === 'production') {
     apiOptions.server = process.env.MONGODB_URI;
 }
 
+let _formatDistance = (distance) => {
+    let numDistance, unit;
+    unit = 'm';
+    if (distance > 1000) {
+        numDistance = parseFloat(distance / 1000).toFixed(1);
+        unit = 'km';
+    } else {
+        numDistance = Math.floor(distance)
+    }
+    return numDistance + unit;
+};
 
-
-// Get 'home' page
-module.exports.homelist = (req, res, next) => {
+let renderHomepage = (req, res, responseBody) => {
     res.render('locations-list', {
         title: 'Loc8r - find places to work with wifi near you!',
         pageHeader: {
             title: 'Loc8r',
             strapLine: 'Find places to work with wifi near you!'
         },
-        locations:[
-            {
-                name: 'Stella\'s',
-                address: '1476 S Pearl St, Denver, CO 80210',
-                rating: 5,
-                facilities: ['Hot drinks', 'Wifi', 'Live Music'],
-                distance: '100m'
-            },
-            {
-                name: 'Café Ciboulette',
-                address: '9660 E Alameda Ave Unit 107, Denver, CO 80247',
-                rating: 5,
-                facilities: ['Hot drinks', 'Food', 'Deserts', 'Wifi'],
-                distance: '50m'
-            },
-            {
-                name: 'Sonder Coffee & Tea',
-                address: '9731 E Iliff Ave, Denver, CO 80231',
-                rating: 3,
-                facilities: ['Hot drinks', 'Wifi'],
-                distance: '300m'
-            }
-        ]
+        locations: responseBody
     });
+};
+
+// Get 'home' page
+module.exports.homelist = (req, res) => {
+    let requestOptions, path;
+    path = '/api/locations';
+    requestOptions = {
+        url: apiOptions.server + path,
+        method: 'GET',
+        json: {},
+        qs: {
+            lng: -104.881283,
+            lat: 39.684565,
+            dist: 20
+        }
+    };
+
+    request(
+        requestOptions,
+        function (err, response, body) {
+            let i, data;
+            data = body;
+            console.log(body);
+            for(i=0;i<data.length; i++){
+                data[i].distance = _formatDistance(data[i].distance);
+            }
+            renderHomepage(req, res, data);
+
+        }
+    );
 };
 
 // Get 'Location info' page
@@ -105,3 +122,4 @@ module.exports.addReview = (req, res, next) => {
     }
     );
 };
+

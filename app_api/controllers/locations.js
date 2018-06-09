@@ -4,7 +4,7 @@ const Loc = mongoose.model('Location');
 const Res = require('./shared');
 
 let theEarth = (function () {
-    let earthRadius = 6371; // km, miles is 3959
+    let earthRadius = 6371; // miles, km is 6371
 
     let getDistanceFromRads = function(rads) {
       return parseFloat(rads * earthRadius);
@@ -35,7 +35,8 @@ module.exports.locationsListByDistance = (req, res, next) => {
     //http://localhost:4000/api/locations?lng=-104.98653&lat=39.732975&dist=20
     let lng = parseFloat(req.query.lng);
     let lat = parseFloat(req.query.lat);
-    let dist = req.query.dist ? parseFloat(req.query.dist) * 1000 : 1000;
+    let dist = parseFloat(req.query.dist);
+
     if (!(lng && lat)) {
         Res.sendJsonResponse(res, 400, {
             "message" : "[lng] and/or [lat] parameters are missing"
@@ -51,11 +52,8 @@ module.exports.locationsListByDistance = (req, res, next) => {
         $geoNear: {
             near: point,
             spherical: true,
-            maxDistance: dist,
+            maxDistance: dist * 1000,
             distanceField: 'distance',
-            // convert meters to miles
-            distanceMultiplier: 0.000621,
-            // max number of entries being returned
             num: 20
         },
     }, {
