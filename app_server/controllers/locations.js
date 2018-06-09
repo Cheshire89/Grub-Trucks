@@ -4,7 +4,7 @@ let apiOptions = {
     server: 'http://localhost:4000'
 };
 if (process.env.NODE_ENV === 'production') {
-    apiOptions.server = process.env.MONGODB_URI;
+    apiOptions.server = 'https://whispering-eyrie-73797.herokuapp.com';
 }
 
 let _formatDistance = (distance) => {
