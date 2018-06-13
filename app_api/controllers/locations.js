@@ -37,7 +37,7 @@ module.exports.locationsListByDistance = (req, res, next) => {
     let lat = parseFloat(req.query.lat);
     let dist = parseFloat(req.query.dist);
 
-    if (!(lng && lat)) {
+    if ((!lng && lng !== 0) || (!lat && lat !== 0)) {
         Res.sendJsonResponse(res, 400, {
             "message" : "[lng] and/or [lat] parameters are missing"
         });

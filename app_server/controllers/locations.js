@@ -1,8 +1,10 @@
 'use strict';
 let request = require('request');
+
 let apiOptions = {
     server: 'http://localhost:4000'
 };
+
 if (process.env.NODE_ENV === 'production') {
     apiOptions.server = 'https://whispering-eyrie-73797.herokuapp.com';
 }
@@ -20,14 +22,22 @@ let _formatDistance = (distance) => {
 };
 
 let renderHomepage = (req, res, responseBody) => {
-    res.render('locations-list', {
+    let renderObj = {
         title: 'Loc8r - find places to work with wifi near you!',
         pageHeader: {
             title: 'Loc8r',
             strapLine: 'Find places to work with wifi near you!'
         },
         locations: responseBody
-    });
+    };
+
+    if (responseBody.success === false) {
+        renderObj.error = {
+            message: responseBody.message,
+            statusCode: responseBody.statusCode
+        };
+    };
+    res.render('locations-list', renderObj);
 };
 
 // Get 'home' page
@@ -50,9 +60,10 @@ module.exports.homelist = (req, res) => {
         function (err, response, body) {
             let i, data;
             data = body;
-            console.log(body);
-            for(i=0;i<data.length; i++){
-                data[i].distance = _formatDistance(data[i].distance);
+            if (response.statusCode === 200 && data.length) {
+                for(i=0;i<data.length; i++){
+                    data[i].distance = _formatDistance(data[i].distance);
+                }
             }
             renderHomepage(req, res, data);
 
