@@ -8,8 +8,12 @@ block content
             .card.panel__info--no-spasing.border-none.mb-0
                 .card-body
                     h1 #{pageHeader.title}
-                    p.rating
-                        +outputRating(location.rating)
+                    if location.rating > 1
+                        p.rating
+                            +outputRating(location.rating)
+                    else
+                        span.badge.badge-success.text-uppercase
+                            | Be The First to Review
                     p.mb-0 #{location.address}
     .row
         .col
@@ -47,7 +51,7 @@ block content
                                 .card-header
                                     h4.card-title.--title.mb-0 Location Map
                                 .card-body
-                                    img.mx-auto.img-fluid(src="https://maps.googleapis.com/maps/api/staticmap?center="+ location.coords[0]+","+location.coords[1]+"&size=500x475&&sensor=false&markers="+location.coords[1]+", "+location.coords[0]+"&key="+location.key.keySecret)
+                                    img.mx-auto.img-fluid(src="https://maps.googleapis.com/maps/api/staticmap?center="+ location.coords.lat+","+location.coords.lng+"&size=500x475&&sensor=false&markers="+location.coords.lat+", "+location.coords.lng+"&key="+location.key.keySecret)
     .row
         .col
             .card.panel__info.border-none
@@ -58,21 +62,23 @@ block content
                                 .card-header.d-flex.justify-content-between.align-items-center
                                     h4.card-title.--title Customer reviews
                                     a.btn.btn-primary(href="/location/review/new") Add Review
-                                .card-body
-                                    each locationRev in location.reviews
-                                        .row.justify-content-center
-                                            .col
-                                                .card.panel__list_item
-                                                    .card-header
-                                                        span.rating
-                                                            +outputRating(locationRev.rating)
-                                                        | &nbsp;
-                                                        span.reviewAuthor #{locationRev.author}
-                                                        | &nbsp;
-                                                        small.reviewTimestrapm #{locationRev.timeStamp}
-                                                    .card-body
-                                                        p.mb-0 #{locationRev.review}
-                            
+                                if location.reviews.length > 0
+                                    .card-body
+                                        each locationRev in location.reviews
+                                            .row.justify-content-center
+                                                .col
+                                                    .card.panel__list_item
+                                                        .card-header
+                                                            span.rating
+                                                                +outputRating(locationRev.rating)
+                                                            | &nbsp;
+                                                            span.reviewAuthor #{locationRev.author}
+                                                            | &nbsp;
+                                                            small.reviewTimestrapm 
+                                                                +formatDate(locationRev.timeStamp)
+                                                        .card-body
+                                                            p.mb-0 #{locationRev.review}
+                                
 
-                               
+                                
 
