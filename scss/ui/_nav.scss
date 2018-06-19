@@ -1,0 +1,28 @@
+#main-nav{
+    background-color: $brand-red;
+    padding:0px;
+    .navbar-collapse {
+        li {
+            text-transform: uppercase;
+            background-color: $brand-red-alt;
+            a {
+                color: $brand-white;
+                padding: 16px 32px;
+            }
+        }
+    }
+    .navbar-brand{
+        padding-left: 1rem;
+        color: $brand-white;
+        font-weight: bold;
+    }
+}
+
+#main-footer{
+    background-color: $brand-grey;
+    border-top: 1px solid $brand-grey-alt;
+    p {
+        padding: 8px 1rem;
+        margin-bottom: 0px;
+    }
+}

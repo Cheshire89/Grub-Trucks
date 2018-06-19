@@ -1,0 +1,13 @@
+.btn-xs{
+    padding: 0.15rem 0.25rem;
+    font-size: 0.675rem;
+    line-height: 1;
+    border-radius: 0.1rem;
+}
+.btn-red{
+    background-color: $brand-red;
+    color: $brand-white;
+    &:hover, &:focus, &:active, &:active:focus{
+        background-color: $brand-red-alt;
+    }
+}

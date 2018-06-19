@@ -46,14 +46,16 @@ block content
                             .col
                               h5.text-right
                                 span.badge.badge-pill.badge-dark.pull-right #{location.distance}
+                          address.card-text.mb-0
+                            p.mb-0 #{location.address}
+
                           if location.rating > 1
-                            p.mb-0
+                            p
                               +outputRating(location.rating)
                           else
-                            span.badge.badge-success.text-uppercase
-                              | Be The First to Review
-                          address.card-text
-                            p #{location.address}
+                            button.btn.btn-red.btn-xs.mb-3.mt-1
+                              i.fas.fa-star
+                              | &nbsp;Write a Review
                           p
                             +facilities(location.facilities)
 

@@ -39,10 +39,10 @@ let _showError = (req, res, status) => {
 
 let renderHomepage = (req, res, responseBody) => {
     let renderObj = {
-        title: 'Loc8r - find places to work with wifi near you!',
+        title: 'GrubTrucks - find food trucks near you!',
         pageHeader: {
-            title: 'Loc8r',
-            strapLine: 'Find places to work with wifi near you!'
+            title: 'GrubTrucks',
+            strapLine: 'find food trucks near you!'
         },
         locations: responseBody
     };

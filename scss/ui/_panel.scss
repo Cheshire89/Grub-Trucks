@@ -1,6 +1,7 @@
 .panel{
     @include element('info') {
         margin-bottom: $panel-margin;
+        border-radius: 0px;
         @include modifier('no-spasing'){
             margin-bottom: 0px;
         }

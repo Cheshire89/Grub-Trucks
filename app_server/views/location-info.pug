@@ -10,12 +10,12 @@ block content
                     .card-body
                         h1 #{pageHeader.title}
                         if location.rating > 1
-                            p.rating
+                            p.rating.h4
                                 +outputRating(location.rating)
                         else
-                            span.badge.badge-success.text-uppercase
-                                | Be The First to Review
-                        p.mb-0 #{location.address}
+                            button.btn.btn-red.btn-md.mb-3.mt-1
+                                i.fas.fa-star
+                                | &nbsp;Write a Review
         .row
             .col
                 .card.panel__info.border-none.mb-0
@@ -53,6 +53,7 @@ block content
                                         h4.card-title.--title.mb-0 Location Map
                                     .card-body
                                         img.mx-auto.img-fluid(src="https://maps.googleapis.com/maps/api/staticmap?center="+ location.coords.lat+","+location.coords.lng+"&size=500x475&&sensor=false&markers="+location.coords.lat+", "+location.coords.lng+"&key="+location.key.keySecret)
+                                        p.mb-0.mt-2.text-right #{location.address}
         .row
             .col
                 .card.panel__info.border-none
@@ -62,7 +63,9 @@ block content
                                 .card.panel__info
                                     .card-header.d-flex.justify-content-between.align-items-center
                                         h4.card-title.--title Customer reviews
-                                        a.btn.btn-primary(href="/location/review/new") Add Review
+                                        a.btn.btn-red.btn-md(href="/location/review/new") 
+                                            i.fas.fa-star
+                                            | &nbsp;Write a Review
                                     if location.reviews.length > 0
                                         .card-body
                                             each locationRev in location.reviews

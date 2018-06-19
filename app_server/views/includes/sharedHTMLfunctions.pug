@@ -1,14 +1,14 @@
 mixin outputRating(rating)
   - for(var i = 1; i <= 5; i++) {
       if i <= rating
-        span.fas.fa-star
+        span.fas.fa-star.text-danger
       else
-        span.far.fa-star
+        span.far.fa-star.text-danger
   - }
 
 mixin facilities(arr)
     each facility in arr
-        span.badge.badge-danger #{facility}
+        button.btn.btn-light.btn-sm #{facility}
         | &nbsp;
 
 mixin formatDate(dateString)
