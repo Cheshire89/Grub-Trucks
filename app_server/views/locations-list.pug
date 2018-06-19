@@ -3,63 +3,64 @@ extends layout
 include includes/sharedHTMLfunctions
 
 block content
-  .page-header
+  .container
+    .page-header
+      .row
+        .col
+          .card.panel__info--no-spasing.border-none
+            .card-body
+              h1= pageHeader.title
+                small &nbsp; #{pageHeader.strapLine}
     .row
       .col
-        .card.panel__info--no-spasing.border-none
+        .card.panel__info.border-none
           .card-body
-            h1= pageHeader.title
-              small &nbsp; #{pageHeader.strapLine}
-  .row
-    .col
-      .card.panel__info.border-none
-        .card-body
-          if error
-            .row
-              .col
-                if error.statusCode === 400
-                  .alert.alert-danger(role="alert")
-                    h5.alert-heading #{error.statusCode} Error
-                      span.float-right
-                        i.fas.fa-exclamation-circle
-                    hr
-                    p.error.mb-0=error.message
-                else
-                  .alert.alert-info(role="alert")
-                    h5.alert-heading #{error.statusCode} Error
-                      span.float-right
-                        i.fas.fa-exclamation-circle
-                    hr
-                    p.error.mb-0=error.message
-          else
-            .row
-              .col-xs-12.col-sm-8
-                .row
-                  each location in locations
-                    .col-12.card.panel__list_item
-                      .card-body
-                        .row
-                          .col
-                            h4.card-title
-                              a(href='/location/'+location._id) #{location.name}
-                          .col
-                            h5.text-right
-                              span.badge.badge-pill.badge-dark.pull-right #{location.distance}
-                        if location.rating > 1
-                          p.mb-0
-                            +outputRating(location.rating)
-                        else
-                          span.badge.badge-success.text-uppercase
-                            | Be The First to Review
-                        address.card-text
-                          p #{location.address}
-                        p
-                          +facilities(location.facilities)
+            if error
+              .row
+                .col
+                  if error.statusCode === 400
+                    .alert.alert-danger(role="alert")
+                      h5.alert-heading #{error.statusCode} Error
+                        span.float-right
+                          i.fas.fa-exclamation-circle
+                      hr
+                      p.error.mb-0=error.message
+                  else
+                    .alert.alert-info(role="alert")
+                      h5.alert-heading #{error.statusCode} Error
+                        span.float-right
+                          i.fas.fa-exclamation-circle
+                      hr
+                      p.error.mb-0=error.message
+            else
+              .row
+                .col-xs-12.col-sm-8
+                  .row
+                    each location in locations
+                      .col-12.card.panel__list_item
+                        .card-body
+                          .row
+                            .col
+                              h4.card-title
+                                a(href='/location/'+location._id) #{location.name}
+                            .col
+                              h5.text-right
+                                span.badge.badge-pill.badge-dark.pull-right #{location.distance}
+                          if location.rating > 1
+                            p.mb-0
+                              +outputRating(location.rating)
+                          else
+                            span.badge.badge-success.text-uppercase
+                              | Be The First to Review
+                          address.card-text
+                            p #{location.address}
+                          p
+                            +facilities(location.facilities)
 
-              .col-xs-12.col-sm-4
-                .card.panel__info
-                  .card-body
-                    p.lead
-                      | GrubTrucks helps you find places to work when out and about.
-                      | Perhaps with coffee. cake or a pint ? Let GrubTrucks help you find the place you're looking for.
+                .col-xs-12.col-sm-4
+                  .card.panel__info
+                    .card-body
+                      p.lead
+                        | GrubTrucks helps you find places to work when out and about.
+                        | Perhaps with coffee. cake or a pint ? Let GrubTrucks help you find the place you're looking for.
 

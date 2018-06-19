@@ -1,7 +1,10 @@
 extends layout
 
 block content
-    .error-page.text-center.d-flex.align-items-center.justify-content-center
-        .error-content
-            h1= title
-            p= content
+    .container-fluid.error-page.text-center.d-flex.align-items-center.justify-content-center
+        .row.error-content
+            .col
+                h1= title
+                p= content
+            
+                

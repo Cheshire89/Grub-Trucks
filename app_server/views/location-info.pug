@@ -3,82 +3,83 @@ extends layout
 include includes/sharedHTMLfunctions
 
 block content
-    .row.page-header
-        .col
-            .card.panel__info--no-spasing.border-none.mb-0
-                .card-body
-                    h1 #{pageHeader.title}
-                    if location.rating > 1
-                        p.rating
-                            +outputRating(location.rating)
-                    else
-                        span.badge.badge-success.text-uppercase
-                            | Be The First to Review
-                    p.mb-0 #{location.address}
-    .row
-        .col
-            .card.panel__info.border-none.mb-0
-                .card-body
-                    .row
-                        .col-sm-6.h-100.order-2.order-md-1
-                            .card.panel__info
-                                .card-header
-                                    h4.card-title.--title Opening hours
-                                .card-body
-                                    each time in location.openingTimes
-                                        p #{time.days} : 
-                                            if time.closed == false
-                                                | #{time.opening} - #{time.closing}
-                                            else
-                                                | Closed
-
-                            .card.panel__info
-                                .card-header
-                                    h4.card-title.--title About
-                                .card-body
-                                    p #{about.content}
-                                    p #{about.callToAction}
-
-                            .card.panel__info
-                                .card-header
-                                    h4.card-title.--title Facilities
-                                .card-body.d-flex
-                                    div.align-self-center
-                                        h5.mb-0
-                                            +facilities(location.facilities)
-                        .col-sm-6.location-map.order-1.order-md-2
-                            .card.panel__info
-                                .card-header
-                                    h4.card-title.--title.mb-0 Location Map
-                                .card-body
-                                    img.mx-auto.img-fluid(src="https://maps.googleapis.com/maps/api/staticmap?center="+ location.coords.lat+","+location.coords.lng+"&size=500x475&&sensor=false&markers="+location.coords.lat+", "+location.coords.lng+"&key="+location.key.keySecret)
-    .row
-        .col
-            .card.panel__info.border-none
-                .card-body
-                    .row
-                        .col
-                            .card.panel__info
-                                .card-header.d-flex.justify-content-between.align-items-center
-                                    h4.card-title.--title Customer reviews
-                                    a.btn.btn-primary(href="/location/review/new") Add Review
-                                if location.reviews.length > 0
+    .container
+        .row.page-header
+            .col
+                .card.panel__info--no-spasing.border-none.mb-0
+                    .card-body
+                        h1 #{pageHeader.title}
+                        if location.rating > 1
+                            p.rating
+                                +outputRating(location.rating)
+                        else
+                            span.badge.badge-success.text-uppercase
+                                | Be The First to Review
+                        p.mb-0 #{location.address}
+        .row
+            .col
+                .card.panel__info.border-none.mb-0
+                    .card-body
+                        .row
+                            .col-sm-6.h-100.order-2.order-md-1
+                                .card.panel__info
+                                    .card-header
+                                        h4.card-title.--title Opening hours
                                     .card-body
-                                        each locationRev in location.reviews
-                                            .row.justify-content-center
-                                                .col
-                                                    .card.panel__list_item
-                                                        .card-header
-                                                            span.rating
-                                                                +outputRating(locationRev.rating)
-                                                            | &nbsp;
-                                                            span.reviewAuthor #{locationRev.author}
-                                                            | &nbsp;
-                                                            small.reviewTimestrapm 
-                                                                +formatDate(locationRev.timeStamp)
-                                                        .card-body
-                                                            p.mb-0 #{locationRev.review}
-                                
+                                        each time in location.openingTimes
+                                            p #{time.days} : 
+                                                if time.closed == false
+                                                    | #{time.opening} - #{time.closing}
+                                                else
+                                                    | Closed
+
+                                .card.panel__info
+                                    .card-header
+                                        h4.card-title.--title About
+                                    .card-body
+                                        p #{about.content}
+                                        p #{about.callToAction}
+
+                                .card.panel__info
+                                    .card-header
+                                        h4.card-title.--title Facilities
+                                    .card-body.d-flex
+                                        div.align-self-center
+                                            h5.mb-0
+                                                +facilities(location.facilities)
+                            .col-sm-6.location-map.order-1.order-md-2
+                                .card.panel__info
+                                    .card-header
+                                        h4.card-title.--title.mb-0 Location Map
+                                    .card-body
+                                        img.mx-auto.img-fluid(src="https://maps.googleapis.com/maps/api/staticmap?center="+ location.coords.lat+","+location.coords.lng+"&size=500x475&&sensor=false&markers="+location.coords.lat+", "+location.coords.lng+"&key="+location.key.keySecret)
+        .row
+            .col
+                .card.panel__info.border-none
+                    .card-body
+                        .row
+                            .col
+                                .card.panel__info
+                                    .card-header.d-flex.justify-content-between.align-items-center
+                                        h4.card-title.--title Customer reviews
+                                        a.btn.btn-primary(href="/location/review/new") Add Review
+                                    if location.reviews.length > 0
+                                        .card-body
+                                            each locationRev in location.reviews
+                                                .row.justify-content-center
+                                                    .col
+                                                        .card.panel__list_item
+                                                            .card-header
+                                                                span.rating
+                                                                    +outputRating(locationRev.rating)
+                                                                | &nbsp;
+                                                                span.reviewAuthor #{locationRev.author}
+                                                                | &nbsp;
+                                                                small.reviewTimestrapm 
+                                                                    +formatDate(locationRev.timeStamp)
+                                                            .card-body
+                                                                p.mb-0 #{locationRev.review}
+                                    
 
                                 
 
