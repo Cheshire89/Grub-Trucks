@@ -21,6 +21,22 @@ let _formatDistance = (distance) => {
     return numDistance + unit;
 };
 
+let _showError = (req, res, status) => {
+    let title, content;
+    if (status === 404) {
+        title = '404, page not found';
+        content = 'Oh dear. Looks like we can\'t find this page. Sorry';
+    } else {
+        title = status + ", something's gone wrong";
+        content = "Something, somewhere, has gone just a little bit wrong.";
+    }
+    res.status(status);
+    res.render('error-page', {
+        title : title,
+        content : content
+    });
+};
+
 let renderHomepage = (req, res, responseBody) => {
     let renderObj = {
         title: 'Loc8r - find places to work with wifi near you!',
@@ -56,8 +72,6 @@ let renderDetailPage = (req, res, locDetail) => {
     renderObj.location.key = {
             keySecret: 'AIzaSyBhXdSgJMV982NO9nc-YIWIlXTes0jZOI8'
     }
-
-    console.log(renderObj.location.coords);
 
     res.render('location-info', renderObj);
 }
@@ -107,11 +121,15 @@ module.exports.locationInfo = (req, res) => {
         requestOptions,
         (err, response, body) => {
             let data = body;
-            data.coords = {
-                lng : body.coords[0],
-                lat : body.coords[1]
-            };
-            renderDetailPage(req, res, data);
+            if (response.statusCode === 200) {
+                data.coords = {
+                    lng : body.coords[0],
+                    lat : body.coords[1]
+                };
+                renderDetailPage(req, res, data);
+            } else {
+                _showError(req, res, response.statusCode);
+            }
         }
     );
 };
