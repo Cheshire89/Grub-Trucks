@@ -1,37 +1,41 @@
 extends layout
 
 block content
-    .page-header
-        .row
-            .col
-                .card.panel__info--no-spasing.border-none
-                    .card-body
-                        h1 #{pageHeader.title}
-        .row.d-flex.align-items-center(style="height: 60vh;")
-            .col
-                form.form-horizontal
-                    .form-group
-                        .col
-                            .row
-                                .col-10
-                                    label.control-label(for="name") Name
-                                    input.form-control(type="text" name="name")
-                                .col-2
-                                    label.control-label(for="rating") Rating
-                                    select.form-control(name="rating")
-                                        option 5
-                                        option 4
-                                        option 3
-                                        option 2
-                                        option 1
-                    .form-group
-                        .col
-                            label.control-label(for="review") Revview
-                            textarea.form-control(name="review", cols="30", rows="5")
-                    .form-group
-                        button.btn.btn-primary.pull-right(type="button") Add my review
+    .container
+        .page-header
+            .row
+                .col
+                    .card.panel__info--no-spasing.border-none
+                        .card-body
+                            h1 #{pageHeader.title}
+            .row.d-flex.align-items-center(style="height: 60vh;")
+                .col
+                    form.form-horizontal
+                        .form-group
+                            .col
+                                .row
+                                    .col-10
+                                        label.control-label(for="name") Name
+                                        input.form-control(type="text" name="name")
+                                    .col-2
+                                        label.control-label(for="rating") Rating
+                                        select.form-control(name="rating")
+                                            option 5
+                                            option 4
+                                            option 3
+                                            option 2
+                                            option 1
+                        .form-group
+                            .col
+                                label.control-label(for="review") Revview
+                                textarea.form-control(name="review", cols="30", rows="5")
+                        .form-group
+                            .col
+                                button.btn.btn-red.btn-md(type="button")
+                                    i.fas.fa-plus
+                                    | &nbsp;Add my review
 
 
 
 
-        
+            
