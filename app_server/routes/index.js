@@ -10,7 +10,8 @@ let ctrlOthers = require(ctrlConfig.path + 'others');
 // Locations pages
 router.get('/', ctrlLocations.homelist);
 router.get('/location/:locationId', ctrlLocations.locationInfo);
-router.get('/location/review/new', ctrlLocations.addReview);
+router.get('/location/:locationId/review/new', ctrlLocations.addReview);
+router.post('/location/:locationId/review/new', ctrlLocations.doAddReview);
 
 // Other pages
 router.get('/about', ctrlOthers.about);
