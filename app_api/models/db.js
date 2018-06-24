@@ -1,7 +1,7 @@
 require('./location');
 var mongoose = require('mongoose');
 var dbName = 'Loc8r';
-var dbURI = 'mongodb://127.0.0.1/Loc8r';
+var dbURI = 'mongodb://127.0.0.1/' + dbName;
 
 if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGODB_URI;

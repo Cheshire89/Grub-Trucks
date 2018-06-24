@@ -188,7 +188,7 @@ let doAddReview = (req, res, location) => {
             } else {
                 updateAverageRating(location._id);
                 let thisReview = location.reviews[location.reviews.length -1];
-                Res.sendJsonResponse(res, 201, thisReview);
+                Res.sendJsonResponse(res, 200, thisReview);
            }
        }) 
     }
