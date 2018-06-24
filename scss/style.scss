@@ -12,9 +12,11 @@
 body{
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+.full-height{
+  min-height: calc(100vh - 83px);
+}
 .error-page{
-  min-height: calc(100vh - 93px);
-  background-color: $brand-red;
+  background-color: $brand-red-alt;
   color: $brand-white;
   font-weight: bold;
 }

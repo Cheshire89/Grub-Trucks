@@ -53,7 +53,7 @@ block content
                             p
                               +outputRating(location.rating)
                           else
-                            button.btn.btn-red.btn-xs.mb-3.mt-1
+                            a.btn.btn-red.btn-xs.mb-3.mt-1(href="/location/" + location._id + "/review/new")
                               i.fas.fa-star
                               | &nbsp;Write a Review
                           p

@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    .container
+    .container.full-height
         .page-header
             .row
                 .col
@@ -10,7 +10,7 @@ block content
                             h1 #{pageHeader.title}
             .row.d-flex.align-items-center(style="height: 60vh;")
                 .col
-                    form.form-horizontal
+                    form.form-horizontal(method="post", role="form")
                         .form-group
                             .col
                                 .row

@@ -7,7 +7,13 @@
 .btn-red{
     background-color: $brand-red;
     color: $brand-white;
-    &:hover, &:focus, &:active, &:active:focus{
+    box-shadow: 0 4px 3px -3px #333;
+    &:hover, &:active{
         background-color: $brand-red-alt;
+        outline: none;
+    }
+    
+    &:focus, &:active:focus {
+        box-shadow: none
     }
 }
