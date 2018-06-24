@@ -68,20 +68,8 @@ block content
                                             | &nbsp;Write a Review
                                     if location.reviews.length > 0
                                         .card-body
-                                            each locationRev in location.reviews
-                                                .row.justify-content-center
-                                                    .col
-                                                        .card.panel__list_item
-                                                            .card-header
-                                                                span.rating
-                                                                    +outputRating(locationRev.rating)
-                                                                | &nbsp;
-                                                                span.reviewAuthor #{locationRev.author}
-                                                                | &nbsp;
-                                                                small.reviewTimestrapm 
-                                                                    +formatDate(locationRev.timeStamp)
-                                                            .card-body
-                                                                p.mb-0 #{locationRev.review}
+                                            //- reviews
+                                            +outputReviews(location.reviews)
                                     
 
                                 

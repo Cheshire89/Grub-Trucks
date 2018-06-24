@@ -11,6 +11,22 @@ mixin facilities(arr)
         button.btn.btn-light.btn-sm #{facility}
         | &nbsp;
 
+mixin outputReviews(reviews)
+    each locationRev in reviews
+        .row.justify-content-center
+            .col
+                .card.panel__list_item--review
+                    .card-header
+                        span.rating
+                            +outputRating(locationRev.rating)
+                        | &nbsp;
+                        span.reviewAuthor #{locationRev.author}
+                        | &nbsp;
+                        small.reviewTimestrapm 
+                            +formatDate(locationRev.timeStamp)
+                    .card-body
+                        p.mb-0 #{locationRev.review}
+
 mixin formatDate(dateString)
   -var date = new Date(dateString);
   -var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

@@ -4,7 +4,7 @@
         border-radius: 0px;
         @include modifier('no-spasing'){
             margin-bottom: 0px;
-        }
+        }  
         .--title{
             margin:0
         }
@@ -12,5 +12,17 @@
 
     @include element('list_item'){
         margin-bottom: $col-spasing;
+        @include modifier('review'){
+            border:0px;
+            border-bottom: 1px solid $brand-red-alt;
+            border-radius: 0px;
+            &:last-child{
+                border-bottom:0px;
+            }
+            .card-header {
+                background-color: transparent;
+                border: 0px;
+            }
+        }
     }
 }
