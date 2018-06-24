@@ -21,7 +21,7 @@ let _formatDistance = (distance) => {
     return numDistance + unit;
 };
 
-let _showError = (req, res, status) => {
+let _showErrorPage = (req, res, status) => {
     let title, content;
     if (status === 404) {
         title = '404, page not found';
@@ -35,6 +35,31 @@ let _showError = (req, res, status) => {
         title : title,
         content : content
     });
+};
+
+let _getLocationInfo = (req, res, callback) => {
+    const path = "/api/locations/" + req.params.locationId;
+    const requestOptions = {
+        url: apiOptions.server + path,
+        method: 'GET',
+        json: {}
+    };
+
+    request(
+        requestOptions,
+        (err, response, body) => {
+            let data = body;
+            if (response.statusCode === 200) {
+                data.coords = {
+                    lng : body.coords[0],
+                    lat : body.coords[1]
+                };
+                callback(req, res, data);
+            } else {
+                _showErrorPage(req, res, response.statusCode);
+            }
+        }
+    );
 };
 
 let renderHomepage = (req, res, responseBody) => {
@@ -55,26 +80,6 @@ let renderHomepage = (req, res, responseBody) => {
     };
     res.render('locations-list', renderObj);
 };
-
-let renderDetailPage = (req, res, locDetail) => {
-    let renderObj = { 
-        title: locDetail.name,
-        pageHeader: {
-            title: locDetail.name
-        },
-        about: {
-            content: 'This cafe is here because they have outstanding selection and fast wifi. I personally love working from this caffe',
-            callToAction: 'If you\'ve been and you like it - please leave a review to help other peopel like you'
-        },
-        location: locDetail  
-    };
-
-    renderObj.location.key = {
-            keySecret: 'AIzaSyBhXdSgJMV982NO9nc-YIWIlXTes0jZOI8'
-    }
-
-    res.render('location-info', renderObj);
-}
 
 // Get 'home' page
 module.exports.homelist = (req, res) => {
@@ -107,41 +112,51 @@ module.exports.homelist = (req, res) => {
     );
 };
 
+let renderDetailPage = (req, res, locDetail) => {
+    let renderObj = { 
+        title: locDetail.name,
+        pageHeader: {
+            title: locDetail.name
+        },
+        about: {
+            content: 'This cafe is here because they have outstanding selection and fast wifi. I personally love working from this caffe',
+            callToAction: 'If you\'ve been and you like it - please leave a review to help other peopel like you'
+        },
+        location: locDetail  
+    };
+
+    renderObj.location.key = {
+        keySecret: 'AIzaSyBhXdSgJMV982NO9nc-YIWIlXTes0jZOI8'
+    }
+
+    res.render('location-info', renderObj);
+};
 
 // Get 'Location info' page
 module.exports.locationInfo = (req, res) => {
-    const path = '/api/locations/' + req.params.locationId;
-    const requestOptions = {
-        url: apiOptions.server + path,
-        method: 'GET',
-        json: {}
-    };
-    
-    request(
-        requestOptions,
-        (err, response, body) => {
-            let data = body;
-            if (response.statusCode === 200) {
-                data.coords = {
-                    lng : body.coords[0],
-                    lat : body.coords[1]
-                };
-                renderDetailPage(req, res, data);
-            } else {
-                _showError(req, res, response.statusCode);
-            }
+    _getLocationInfo(req, res, (req, res, responseData) => {
+        renderDetailPage(req, res, responseData);
+    });
+};
+
+let renderReviewForm = (req, res, locDetail) => {
+    let renderObj = {
+        title: 'Review ' + locDetail.name + ' on GrubTrucks',
+        pageHeader: {
+            title: 'Review ' + locDetail.name
         }
-    );
+    };
+    res.render('location-review-form', renderObj);
 };
 
 // Get 'Add review' page
-module.exports.addReview = (req, res, next) => {
-    res.render('location-review-form', {
-        title: 'Add review',
-        pageHeader: {
-            title: 'Review Stella\'s'
-        }
-    }
-    );
+module.exports.addReview = (req, res) => {
+    console.log('Add Review');
+    _getLocationInfo(req, res, (req, res, responseData) => {
+        renderReviewForm(req, res, responseData);
+    });
 };
 
+module.exports.doAddReview = (req, res) => {
+
+};
