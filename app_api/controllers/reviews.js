@@ -215,7 +215,7 @@ let doSetAverageRating = (location) => {
         for (i = 0; i < reviewCount; i++) {
             ratingTotal += location.reviews[i].rating;
         }
-        ratingAverage = parseInt(ratingTotal / reviewCount, 10);
+        ratingAverage = parseFloat(ratingTotal / reviewCount, 10);
         location.rating = ratingAverage;
         location.save((error) => {
             if (error) {
