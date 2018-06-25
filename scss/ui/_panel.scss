@@ -16,13 +16,19 @@
             border:0px;
             border-bottom: 1px solid $brand-red-alt;
             border-radius: 0px;
-            &:last-child{
-                border-bottom:0px;
-            }
+            margin-bottom: $col-spasing;
             .card-header {
                 background-color: transparent;
                 border: 0px;
             }
+        }
+    }
+
+}
+.reviews {
+    .row:last-child{
+        .panel__list_item--review{
+            border-bottom: 0px;
         }
     }
 }
