@@ -23,12 +23,16 @@
             }
         }
     }
-
 }
+
 .reviews {
     .row:last-child{
-        .panel__list_item--review{
-            border-bottom: 0px;
+        .panel{
+            @include element('list_item'){ 
+                @include modifier('review'){
+                    border-bottom: 0px;
+                }
+            }
         }
     }
 }

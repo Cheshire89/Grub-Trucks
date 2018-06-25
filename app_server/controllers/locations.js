@@ -176,7 +176,7 @@ module.exports.doAddReview = (req, res) => {
         requestOptions,
         (error, response, data) => {
             if (response.statusCode === 200) {
-                res.redirect('/location' + locationId);
+                res.redirect('/location/' + locationId);
             } else {
                 _showErrorPage(req, res, response.statusCode);
             }
