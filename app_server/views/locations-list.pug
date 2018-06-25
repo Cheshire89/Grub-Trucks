@@ -19,19 +19,9 @@ block content
               .row
                 .col
                   if error.statusCode === 400
-                    .alert.alert-danger(role="alert")
-                      h5.alert-heading #{error.statusCode} Error
-                        span.float-right
-                          i.fas.fa-exclamation-circle
-                      hr
-                      p.error.mb-0=error.message
+                    +outputAlert(error.statusCode, error.message, "alert-danger")
                   else
-                    .alert.alert-info(role="alert")
-                      h5.alert-heading #{error.statusCode} Error
-                        span.float-right
-                          i.fas.fa-exclamation-circle
-                      hr
-                      p.error.mb-0=error.message
+                    +outputAlert(error.statusCode, error.message, "alert-info")
             else
               .row
                 .col-xs-12.col-sm-8

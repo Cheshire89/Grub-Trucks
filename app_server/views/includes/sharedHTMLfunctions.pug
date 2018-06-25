@@ -35,3 +35,11 @@ mixin formatDate(dateString)
   -var y = date.getFullYear();
   -var output = d + ' ' + m + ' ' + y;
   =output
+
+mixin outputAlert(statusCode, content, type)
+    .alert(role="alert" class=type)
+        h5.alert-heading #{statusCode} Error
+        span.float-right
+            i.fas.fa-exclamation-circle
+        hr
+        p.error.mb-0=content

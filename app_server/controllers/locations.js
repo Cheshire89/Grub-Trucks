@@ -145,7 +145,8 @@ let renderReviewForm = (req, res, locDetail) => {
         title : 'Review ' + locDetail.name + ' on GrubTrucks',
         pageHeader : {
             title : 'Review ' + locDetail.name
-        }
+        },
+        error: req.query.error
     };
     res.render('location-review-form', renderObj);
 };
@@ -175,8 +176,10 @@ module.exports.doAddReview = (req, res) => {
     request(
         requestOptions,
         (error, response, data) => {
-            if (response.statusCode === 200) {
+            if (response.statusCode === 201) {
                 res.redirect('/location/' + locationId);
+            } else if (response.statusCode === 400 && data.name && data.name === "ValidationError") {
+                res.redirect('/location/' + locationId + '/reviews/new?error=val')
             } else {
                 _showErrorPage(req, res, response.statusCode);
             }
