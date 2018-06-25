@@ -8,9 +8,15 @@ block content
                     .card.panel__info--no-spasing.border-none
                         .card-body
                             h1 #{pageHeader.title}
+            
             .row.d-flex.align-items-center(style="height: 60vh;")
                 .col
                     form.form-horizontal(method="post", role="form")
+                        - if(error === "val")
+                            .form-group
+                                .col
+                                    .alert.alert-danger(role="alert")
+                                        | All Fields required. please try again
                         .form-group
                             .col
                                 .row
