@@ -1,11 +1,12 @@
 mixin outputRating(rating)
   - for(var i = 1; i <= 5; i++) {
-      if i < rating
+      if i <= rating
         span.fas.fa-star.text-danger
-      else if i > rating && rating < i + 1 && i + 1 !== 6
-        span.fas.fa-star-half-alt.text-danger
-      else if rating < i + 1
-        span.far.fa-star.text-danger
+      else
+        if rating % 1 !== 0 && rating < i + 1 && i + 1 !== 6
+            span.fas.fa-star-half-alt.text-danger
+        else if i > rating
+            span.far.fa-star.text-danger
   - }
 
 mixin facilities(arr)
